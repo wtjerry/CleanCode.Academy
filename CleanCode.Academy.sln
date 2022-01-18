@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "src\Examples\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples.Test", "src\Examples.Test\Examples.Test.csproj", "{AF288691-5EA9-4717-AE4D-D6FD9E878B25}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 Examples", "0 Examples", "{6F050547-A7A2-4148-8B93-54981908627E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +39,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A74EFC0-1537-4362-B314-B7F8E4CA4DD3}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{30A8988D-5FDB-4DF4-B5E8-62646194A02D} = {6F050547-A7A2-4148-8B93-54981908627E}
+		{AF288691-5EA9-4717-AE4D-D6FD9E878B25} = {6F050547-A7A2-4148-8B93-54981908627E}
 	EndGlobalSection
 EndGlobal
