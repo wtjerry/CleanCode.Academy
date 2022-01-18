@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="bbv coding guidelines for production code" ToolsVersion="14.0">
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <!--
+         CA1062: Validate arguments of public methods
+
+         why disabled:
+         - this creates a lot of noise. We rather explicitly validate only when we know something might go wrong
+     -->
+    <Rule Id="CA1062" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+      <!--
+        SA1600: Elements must be documented
+
+        Why disabled:
+        - as long as the elements (like method name) have a meaningfull name additional documentation
+        becomes a overhead.
+        -->
+      <Rule Id="SA1600" Action="None" />
+
+      <!--
+        SA1633: FileMustHaveHeader
+
+        Why disabled:
+        - produces unnecessary noise
+    -->
+      <Rule Id="SA1633" Action="None" />
+  </Rules>
+</RuleSet>
