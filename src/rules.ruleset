@@ -1,30 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="bbv coding guidelines for production code" ToolsVersion="14.0">
-  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-    <!--
-         CA1062: Validate arguments of public methods
+    <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+        <!--
+        CA1062: Validate arguments of public methods
 
-         why disabled:
-         - this creates a lot of noise. We rather explicitly validate only when we know something might go wrong
-     -->
-    <Rule Id="CA1062" Action="None" />
-  </Rules>
-  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
-      <!--
+        why disabled:
+        - this creates a lot of noise. We rather explicitly validate only when we know something might go wrong
+        -->
+        <Rule Id="CA1062" Action="None" />
+
+
+        <!-- the following rules are disabled to be able to import code from the old CleanCode.Academy project -->
+        <Rule Id="CA1814" Action="None" />
+        <Rule Id="CA1303" Action="None" />
+        <Rule Id="CA1305" Action="None" />
+        <Rule Id="CA1822" Action="None" />
+        <Rule Id="CA1707" Action="None" />
+        <Rule Id="CA1067" Action="None" />
+    </Rules>
+        <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+        <!--
         SA1600: Elements must be documented
 
         Why disabled:
         - as long as the elements (like method name) have a meaningfull name additional documentation
         becomes a overhead.
         -->
-      <Rule Id="SA1600" Action="None" />
+        <Rule Id="SA1600" Action="None" />
 
-      <!--
+        <!--
         SA1633: FileMustHaveHeader
 
         Why disabled:
         - produces unnecessary noise
-    -->
-      <Rule Id="SA1633" Action="None" />
-  </Rules>
+        -->
+        <Rule Id="SA1633" Action="None" />
+
+
+        <!-- the following rules are disabled to be able to import code from the old CleanCode.Academy project -->
+        <Rule Id="SA1607" Action="None" />
+        <Rule Id="SA1413" Action="None" />
+        <Rule Id="SA1013" Action="None" />
+        <Rule Id="SA1500" Action="None" />
+        <Rule Id="SA1629" Action="None" />
+        <Rule Id="SA1604" Action="None" />
+        <Rule Id="SA1402" Action="None" />
+        <Rule Id="SA1649" Action="None" />
+        <Rule Id="SA1518" Action="None" />
+        <Rule Id="SA1011" Action="None" />
+        <Rule Id="SA1012" Action="None" />
+        <Rule Id="SA1005" Action="None" />
+        <Rule Id="SA1120" Action="None" />
+        <Rule Id="SA1100" Action="None" />
+        <Rule Id="SA1103" Action="None" />
+        <Rule Id="SA1009" Action="None" />
+        <Rule Id="SA1300" Action="None" />
+        <Rule Id="SA1210" Action="None" />
+        <Rule Id="SA1026" Action="None" />
+        <Rule Id="SA1135" Action="None" />
+        <Rule Id="SA1003" Action="None" />
+        <Rule Id="SA1201" Action="None" />
+    </Rules>
 </RuleSet>
