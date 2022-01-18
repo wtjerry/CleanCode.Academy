@@ -13,10 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		rules.ruleset = src/rules.ruleset
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Academy", "src\CleanCode.Academy\CleanCode.Academy.csproj", "{181A3A29-0884-4080-9C5B-7E8FC3F13C2F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Academy.Tests", "src\CleanCode.Academy.Tests\CleanCode.Academy.Tests.csproj", "{72A79C84-EFF2-4E2E-A37D-F7F875048DA9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "src\Examples\Examples.csproj", "{30A8988D-5FDB-4DF4-B5E8-62646194A02D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples.Test", "src\Examples.Test\Examples.Test.csproj", "{AF288691-5EA9-4717-AE4D-D6FD9E878B25}"
@@ -27,14 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{181A3A29-0884-4080-9C5B-7E8FC3F13C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{181A3A29-0884-4080-9C5B-7E8FC3F13C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{181A3A29-0884-4080-9C5B-7E8FC3F13C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{181A3A29-0884-4080-9C5B-7E8FC3F13C2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72A79C84-EFF2-4E2E-A37D-F7F875048DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72A79C84-EFF2-4E2E-A37D-F7F875048DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72A79C84-EFF2-4E2E-A37D-F7F875048DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72A79C84-EFF2-4E2E-A37D-F7F875048DA9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30A8988D-5FDB-4DF4-B5E8-62646194A02D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30A8988D-5FDB-4DF4-B5E8-62646194A02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30A8988D-5FDB-4DF4-B5E8-62646194A02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
