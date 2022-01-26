@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EmployeeType.cs" company="bbv Software Services AG">
-//   Copyright (c) 2014 - 2020
-//   
+// <copyright file="EngineerTest.cs" company="bbv Software Services AG">
+//   Copyright (c) 2014
+//
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
-//   
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-//   
+//
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,12 +16,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CleanCode.Naming.HiddenPolymorphism
+namespace CleanCode.Design.HiddenPolymorphism
 {
-    public enum EmployeeType
+    using FluentAssertions;
+    using Xunit;
+
+    public class EngineerTest
     {
-        Engineer,
-        Manager,
-        Salesman
+        [Fact]
+        public void HasMonthlySalary()
+        {
+            const int MonthlySalary = 5000;
+
+            var engineer = new Engineer(MonthlySalary);
+            int salaryToPay = engineer.CalculateSalary();
+
+            salaryToPay.Should().Be(MonthlySalary);
+        }
     }
 }

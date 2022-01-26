@@ -20,8 +20,8 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
 {
     using System.Collections.Generic;
     using FakeItEasy;
-    using FluentAssertions;
     using Xunit;
+    using static CleanCode.Naming.EitherExtensions;
 
     // TODO: Change the code so that you don't control the program flow with exceptions. You are allowed to eliminate classes if it helps you simplify the code
     public class LoginServiceIntegrationTest
@@ -35,7 +35,7 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
             this.knownUsers = new Dictionary<string, string>();
             this.tokenGenerator = A.Fake<ITokenGenerator>();
 
-            this.testee = new LoginService(new UserAuthenticator(this.knownUsers, this.tokenGenerator));
+            this.testee = new LoginService(this.knownUsers, this.tokenGenerator);
         }
 
         [Fact]
@@ -43,16 +43,14 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
         {
             const string Username = "User";
             const string Password = "Password";
-            const string SessionToken = "123456789";
+            var sessionToken = new Token("123456789");
 
             this.knownUsers.Add(Username, Password);
-            A.CallTo(() => this.tokenGenerator.Get()).Returns(SessionToken);
+            A.CallTo(() => this.tokenGenerator.Get()).Returns(sessionToken);
 
-            LoginResult loginResult = this.testee.Login(Username, Password);
+            var loginResult = this.testee.Login(Username, Password);
 
-            loginResult.Should().NotBeNull();
-            loginResult.Token.Should().Be(SessionToken);
-            loginResult.Message.Should().Be("Login successful");
+            loginResult.Should().BeRight(sessionToken);
         }
 
         [Fact]
@@ -63,9 +61,9 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
 
             this.knownUsers.Add(Username, "Password");
 
-            LoginResult loginResult = this.testee.Login(Username, WrongPassword);
+            var loginResult = this.testee.Login(Username, WrongPassword);
 
-            loginResult.Message.Should().Be("Password wrong");
+            loginResult.Should().BeLeft("Password wrong");
         }
 
         [Fact]
@@ -73,10 +71,9 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
         {
             const string UnknownUsername = "invalid user";
 
-            LoginResult loginResult = this.testee.Login(UnknownUsername, string.Empty);
+            var loginResult = this.testee.Login(UnknownUsername, string.Empty);
 
-            loginResult.Message.Should().Be("User not found");
+            loginResult.Should().BeLeft("User not found");
         }
-
     }
 }

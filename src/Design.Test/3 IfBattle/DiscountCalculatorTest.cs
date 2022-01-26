@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DiscountCalculatorTest.cs" company="bbv Software Services AG">
-//   Copyright (c) 2014 - 2020
+//   Copyright (c) 2014
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -18,106 +18,76 @@
 
 namespace CleanCode.Naming.IfBattle
 {
+    using System;
+    using System.Collections.Generic;
+    using FakeItEasy;
     using FluentAssertions;
     using Xunit;
 
-    // TODO: Refactor the DiscountCalculator in a way that it allows adding more rules and then fix the failing test at the end!
     // Important: Make sure you do small steps. Don't let all your tests fail, use parallel implementation etc.
     public class DiscountCalculatorTest
     {
         private DiscountCalculator testee;
+        private List<IDiscountStrategy> strategies;
 
         public DiscountCalculatorTest()
         {
-            this.testee = new DiscountCalculator();
+            this.strategies = new List<IDiscountStrategy>();
+
+            this.testee = new DiscountCalculator(this.strategies);
         }
 
         [Fact]
-        public void HasNoDiscount_WhenNewCustomer()
+        public void ReturnsTheBestDiscount()
         {
-            var order = new Order(new Customer(), 50);
+            const int BadDiscount = 3;
+            const int GoodDiscount = 5;
+
+            var order = new Order(new Customer(), 0);
+
+            var badDiscountStrategy = CreateDiscountStrategyThatQualifies(order, BadDiscount);
+            var goodDiscountStrategy = CreateDiscountStrategyThatQualifies(order, GoodDiscount);
+            this.strategies.Add(badDiscountStrategy);
+            this.strategies.Add(goodDiscountStrategy);
 
             int discount = this.testee.CalculateDiscount(order);
 
-            discount.Should().Be(0);
+            discount.Should().Be(GoodDiscount);
         }
 
         [Fact]
-        public void Has5PercentDiscount_WhenCustomerIsRegularCustomer()
+        public void IgnoresDiscountThatDoesNotQualify()
         {
-            var customer = new Customer { NumberOfOrders = 10 };
-            var order = new Order(customer, 0);
+            const int Discount = 5;
+
+            var order = new Order(new Customer(), 0);
+
+            var discountStrategy = CreateDiscountStrategyThatQualifies(order, Discount);
+            var ignoredDiscountStrategy = CreateDiscountStrategyThatDoesNotQualify(order);
+            this.strategies.Add(discountStrategy);
+            this.strategies.Add(ignoredDiscountStrategy);
 
             int discount = this.testee.CalculateDiscount(order);
 
-            discount.Should().Be(5);
+            discount.Should().Be(Discount);
         }
 
-        [Fact]
-        public void RegularCustomerHas2PercentExtraDiscount_WhenOrderIsWorth100OrMore()
+        private static IDiscountStrategy CreateDiscountStrategyThatQualifies(Order order, int discount)
         {
-            var customer = new Customer { NumberOfOrders = 10 };
-            var order = new Order(customer, 100);
+            var discountStrategy = A.Fake<IDiscountStrategy>();
+            A.CallTo(() => discountStrategy.QualifiesForDiscount(order.Customer)).Returns(true);
+            A.CallTo(() => discountStrategy.CalculateDiscount(order)).Returns(discount);
 
-            int discount = this.testee.CalculateDiscount(order);
-
-            discount.Should().Be(7);
+            return discountStrategy;
         }
 
-        [Fact]
-        public void NewCustomerHas1PercentDiscount_WhenOrderIsWorth200OrMore()
+        private static IDiscountStrategy CreateDiscountStrategyThatDoesNotQualify(Order order)
         {
-            var customer = new Customer();
-            var order = new Order(customer, 200);
+            var discountStrategy = A.Fake<IDiscountStrategy>();
+            A.CallTo(() => discountStrategy.QualifiesForDiscount(order.Customer)).Returns(false);
+            A.CallTo(() => discountStrategy.CalculateDiscount(A<Order>._)).Throws(new InvalidOperationException("Does not qualify for discount"));
 
-            int discount = this.testee.CalculateDiscount(order);
-
-            discount.Should().Be(1);
-        }
-
-        [Fact]
-        public void NewCustomerPays2PercentExtra_WhenOrderIsWorthLessThan30()
-        {
-            var customer = new Customer();
-            var order = new Order(customer, 29);
-
-            int discount = this.testee.CalculateDiscount(order);
-
-            discount.Should().Be(-2);
-        }
-
-        [Fact]
-        public void LargeAccountCustomerHas6PercentDiscount_WhenOrderIsLessThan200()
-        {
-            var customer = new Customer { NumberOfOrders = 1000 };
-            var order = new Order(customer, 199);
-
-            int discount = this.testee.CalculateDiscount(order);
-
-            discount.Should().Be(6);
-        }
-
-        [Fact]
-        public void LargeAccountCustomerHas8PercentDiscount_WhenOrderIsWorth200OrMore()
-        {
-            var customer = new Customer { NumberOfOrders = 1000 };
-            var order = new Order(customer, 200);
-
-            int discount = this.testee.CalculateDiscount(order);
-
-            discount.Should().Be(8);
-        }
-
-        // TODO: Refactor before you make that test work!
-        [Fact]
-        public void LargeAccountCustomerAlwaysGetsTheBestDiscount()
-        {
-            var customer = new Customer { NumberOfOrders = 1000 };
-            var order = new Order(customer, 150);
-
-            int discount = this.testee.CalculateDiscount(order);
-
-            discount.Should().Be(7);
+            return discountStrategy;
         }
     }
 }

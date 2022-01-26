@@ -20,6 +20,7 @@ namespace CleanCode.Naming.UnexpectedSideEffect
 {
     using FluentAssertions;
     using Xunit;
+    using static CleanCode.Naming.MaybeExtensions;
 
     // TODO: Change the SimpleCustomerFinder implementation so that the 'Find' method has no side effects.
     // e.g. add a query method to check for a customer to exist! or return a FindResult
@@ -38,9 +39,9 @@ namespace CleanCode.Naming.UnexpectedSideEffect
         {
             const int Id = 1;
 
-            Customer customer = this.testee.Find(Id);
+            var maybeCustomer = this.testee.Find(Id);
 
-            customer.Name.Should().Be("bbv");
+            maybeCustomer.Map(c => c.Name).Should().BeSome("bbv");
         }
 
         [Fact]
@@ -48,9 +49,9 @@ namespace CleanCode.Naming.UnexpectedSideEffect
         {
             const int NotExistingId = 3;
 
-            Customer customer = this.testee.Find(NotExistingId);
+            var maybeCustomer = this.testee.Find(NotExistingId);
 
-            customer.Should().NotBeNull();
+            maybeCustomer.Should().BeNone();
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LoginResult.cs" company="bbv Software Services AG">
-//   Copyright (c) 2014 - 2020
-//   
+// <copyright file="SalesmanTest.cs" company="bbv Software Services AG">
+//   Copyright (c) 2014
+//
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
-//   
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-//   
+//
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,18 +16,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CleanCode.Naming.ExceptionsForControlFlow
+namespace CleanCode.Design.HiddenPolymorphism
 {
-    public class LoginResult
+    using FluentAssertions;
+    using Xunit;
+
+    public class SalesmanTest
     {
-        public LoginResult(string token, string message)
+        [Fact]
+        public void HasCommission()
         {
-            this.Message = message;
-            this.Token = token;
+            const int MonthlySalary = 6000;
+            const int Commission = 500;
+
+            var salesman = new Salesman(MonthlySalary, Commission);
+            int salaryToPay = salesman.CalculateSalary();
+
+            salaryToPay.Should().Be(MonthlySalary + Commission);
         }
-
-        public string Token { get; private set; }
-
-        public string Message { get; private set; }
     }
 }

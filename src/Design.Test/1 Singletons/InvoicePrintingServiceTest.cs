@@ -19,17 +19,20 @@
 namespace CleanCode.Naming.Singletons
 {
     using System;
+    using FakeItEasy;
     using FluentAssertions;
     using Xunit;
 
     public class InvoicePrintingServiceTest
     {
+        private readonly IPrinter fakePrinter;
         private InvoicePrintingService testee;
 
         // TODO: implement the Printer in a way that it can be asserted in the failing test. Replace the singleton with an Interface and an implementation
         public InvoicePrintingServiceTest()
         {
-            this.testee = new InvoicePrintingService();
+            this.fakePrinter = A.Fake<IPrinter>();
+            this.testee = new InvoicePrintingService(fakePrinter);
         }
 
         [Fact]
@@ -38,8 +41,7 @@ namespace CleanCode.Naming.Singletons
             var invoice = new Invoice(new DateTime(2013, 2, 27));
             this.testee.PrintInvoice(invoice);
 
-            // Cannot assert that the invoice was printed :-(
-            true.Should().BeFalse();
+            A.CallTo(() => this.fakePrinter.Print(invoice)).MustHaveHappenedOnceExactly();
         }
     }
 }

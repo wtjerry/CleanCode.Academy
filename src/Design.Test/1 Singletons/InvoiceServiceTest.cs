@@ -19,23 +19,27 @@
 namespace CleanCode.Naming.Singletons
 {
     using System;
+    using FakeItEasy;
     using FluentAssertions;
     using Xunit;
 
     // TODO: Refactor the code in a way that you can implement the failing test properly (today has to remain 2013-02-27!!)
     public class InvoiceServiceTest
     {
+        private readonly IDateTimeProvider dateTimeProvider;
         private InvoiceService testee;
 
         public InvoiceServiceTest()
         {
-            this.testee = new InvoiceService();
+            this.dateTimeProvider = A.Fake<IDateTimeProvider>();
+            this.testee = new InvoiceService(this.dateTimeProvider);
         }
 
         [Fact]
         public void SetsTheCurrentDate()
         {
             var today = new DateTime(2013, 2, 27);
+            A.CallTo(() => this.dateTimeProvider.GetToday()).Returns(today);
 
             var invoice = this.testee.CreateInvoice();
 

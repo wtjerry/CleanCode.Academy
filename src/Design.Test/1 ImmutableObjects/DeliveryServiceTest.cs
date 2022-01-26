@@ -1,5 +1,6 @@
 ﻿namespace CleanCode.Naming.ImmutableObjects
 {
+    using System.Collections.Generic;
     using FakeItEasy;
     using Xunit;
 
@@ -7,6 +8,10 @@
     // What about the change of the delivery address before sending the package?
     // TODO: Refactor the Order and Position so that objects of these types are immutable (read-only).
     // TODO: Reduce the interface of IBoxingService.Box(Order) to a minimum
+    //
+    // -->
+    // Windows 8 was actually an error
+    // IBoxingService can be reduced to positions, doesnt need to know adress
     public class DeliveryServiceTest
     {
         private DeliveryService testee;
@@ -24,12 +29,15 @@
         [Fact]
         public void SendsTheBoxedOrderByMail()
         {
-            var order = new Order { Address = "bbv Software Serivces AG; Luzern" };
-            order.Positions.Add(new Position { Item = "Visual Studio", Amount = 3 });
-            order.Positions.Add(new Position { Item = "ReSharper", Amount = 2 });
+            var positions = new List<Position>
+            {
+                new("Visual Studio", 3),
+                new("ReSharper", 2)
+            };
+            var order = new Order("bbv Software Serivces AG; Luzern", positions);
 
             var parcel = new Parcel();
-            A.CallTo(() => this.boxingService.Box(order)).Returns(parcel);
+            A.CallTo(() => this.boxingService.Box(positions)).Returns(parcel);
 
             this.testee.Deliver(order);
 

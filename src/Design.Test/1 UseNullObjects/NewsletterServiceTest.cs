@@ -52,18 +52,5 @@ namespace CleanCode.Naming.UseNullObjects
             A.CallTo(() => bbv.SendNewsletter()).MustHaveHappened();
             A.CallTo(() => bbvIct.SendNewsletter()).MustHaveHappened();
         }
-
-        [Fact]
-        public void SkipsUnknownCustomers()
-        {
-            const string UnknownCustomer = "unknown customer";
-
-            ICustomer unknownCustomer = null;
-            A.CallTo(() => this.customerFinder.Find(UnknownCustomer)).Returns(unknownCustomer);
-
-            Action act = () => this.testee.SendNewsToCustomers(new[] { UnknownCustomer });
-
-            act.Should().NotThrow();
-        }
     }
 }

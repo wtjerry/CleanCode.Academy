@@ -23,7 +23,7 @@ namespace CleanCode.Naming.OutParameters
 
     public class InvoiceParser
     {
-        public bool TryParse(XDocument invoiceDescription, out Invoice invoice)
+        public Maybe<Invoice> Parse(XDocument invoiceDescription)
         {
             XElement invoiceElement = invoiceDescription.Element("Invoice");
             XElement customerElement = invoiceElement.Element("Customer");
@@ -31,12 +31,11 @@ namespace CleanCode.Naming.OutParameters
 
             if (!IsInvoiceValid(customerElement, amountElement))
             {
-                invoice = null;
-                return false;
+                return Maybe<Invoice>.None();
             }
 
-            invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value));
-            return true;
+            var invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value));
+            return Maybe<Invoice>.Some(invoice);
         }
 
         private bool IsInvoiceValid(XElement customerElement, XElement amountElement)

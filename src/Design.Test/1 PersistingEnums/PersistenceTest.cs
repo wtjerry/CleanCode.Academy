@@ -24,6 +24,10 @@ namespace CleanCode.Naming.PersistingEnums
     // TODO: Make sure you can easily add a new 'Title' and don't get into trouble when you rename the title (e.g. Ms to Miss) just in your code without affecting
     // existing records in your database (We know it's In-Memory in this code, but use your imagination here and think of it as being a real persistent database with
     // millions of records)
+    //
+    // -->
+    // either make sure to add integer numbers as backing for the enum names (like Sir=0)
+    // or change to use const strings instead of enum
     public class PersistenceTest
     {
         private Persistence testee;

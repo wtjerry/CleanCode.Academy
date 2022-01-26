@@ -20,8 +20,8 @@ namespace CleanCode.Naming.OutParameters
 {
     using System;
     using System.Xml.Linq;
-    using FluentAssertions;
     using Xunit;
+    using static CleanCode.Naming.MaybeExtensions;
 
     // TODO: Refactor the code so that you don't have an 'out' parameter anymore. But don't return 'null' when you cannot parse the invoice!
     // Hint: use a Result object
@@ -40,44 +40,19 @@ namespace CleanCode.Naming.OutParameters
             const string Customer = "bbv Software Services AG";
             const int Amount = 1200;
 
-            Invoice invoice;
-            this.testee.TryParse(CreateInvoice(Customer, Amount), out invoice);
+            var maybeInvoice = this.testee.Parse(CreateInvoice(Customer, Amount));
 
-            invoice.Should().BeEquivalentTo(new Invoice(Customer, Amount));
-        }
-
-        [Fact]
-        public void ReturnsTrue_WhenInvoiceCanBeParsed()
-        {
-            const string Customer = "bbv Software Services AG";
-            const int Amount = 1200;
-
-            Invoice invoice;
-            bool result = this.testee.TryParse(CreateInvoice(Customer, Amount), out invoice);
-
-            result.Should().BeTrue();
+            maybeInvoice.Should().BeSome(new Invoice(Customer, Amount));
         }
 
         [Theory]
         [InlineData("", "100")]
         [InlineData("bbv", "")]
-        public void InvoiceIsNull_WhenInvoiceCannotBeParsed(string customer, string amount)
+        public void InvoiceIsNone_WhenInvoiceCannotBeParsed(string customer, string amount)
         {
-            Invoice invoice;
-            this.testee.TryParse(CreateInvoice(customer, amount), out invoice);
+            var maybeInvoice = this.testee.Parse(CreateInvoice(customer, amount));
 
-            invoice.Should().BeNull();
-        }
-
-        [Theory]
-        [InlineData("", "100")]
-        [InlineData("bbv", "")]
-        public void ReturnsFalse_WhenInvoiceCannotBeParsed(string customer, string amount)
-        {
-            Invoice invoice;
-            bool result = this.testee.TryParse(CreateInvoice(customer, amount), out invoice);
-
-            result.Should().BeFalse();
+            maybeInvoice.Should().BeNone();
         }
 
         private static XDocument CreateInvoice(string customer, string amount)
