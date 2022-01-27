@@ -22,9 +22,16 @@ public static class Program
             Factory.CreateForInMemoryRepositoryUsage(
                 appConfig,
                 new InMemoryPersistence()));
+
+        builder.Services.AddControllers();
         var app = builder.Build();
 
         app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
 
         app.Run();
     }

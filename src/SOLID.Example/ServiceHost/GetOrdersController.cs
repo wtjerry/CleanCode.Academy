@@ -14,7 +14,7 @@ public class GetOrdersController : ControllerBase
         this.factory = factory;
     }
 
-    [HttpGet("/")]
+    [HttpGet("")]
     public async Task<IActionResult> Get(
         string id)
     {

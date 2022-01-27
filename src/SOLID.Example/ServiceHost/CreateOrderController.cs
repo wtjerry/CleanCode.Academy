@@ -17,7 +17,7 @@ public class CreateOrderController : ControllerBase
         this.factory = factory;
     }
 
-    [HttpPost("/")]
+    [HttpPost("")]
     public async Task<IActionResult> Post(
         [FromBody] OrderDto item)
     {
