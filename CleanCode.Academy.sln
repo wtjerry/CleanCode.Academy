@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Testing", "4 Testing", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Sample", "src\Testing.Sample\Testing.Sample.csproj", "{C035BB11-300D-4B30-BF01-13551883A790}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 SOLID Example", "5 SOLID Example", "{6C3B1A36-CF19-4E8A-94A0-35FB5D9D17DF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 Example project structure¨", "5 Example project structure¨", "{6C3B1A36-CF19-4E8A-94A0-35FB5D9D17DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\SOLID.Example\Core\Core.csproj", "{7CAB0764-A07C-4922-92D9-7251B3172D95}"
 EndProject
