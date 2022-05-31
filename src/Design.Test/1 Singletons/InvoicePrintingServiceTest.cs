@@ -26,6 +26,9 @@ namespace CleanCode.Naming.Singletons
     {
         private InvoicePrintingService testee;
 
+        // Oh no it's those awful Singletons again. Once upon a time they were praised as the best thing
+        // since slided bread. Nowadays we see them mostly as legacy code that makes our life
+        // more difficult than it needs to be.
         // TODO: implement the Printer in a way that it can be asserted in the failing test. Replace the singleton with an Interface and an implementation
         public InvoicePrintingServiceTest()
         {

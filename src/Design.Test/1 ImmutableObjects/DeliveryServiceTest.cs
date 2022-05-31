@@ -3,10 +3,12 @@
     using FakeItEasy;
     using Xunit;
 
-    // What about the 'Windows 8' that are boxed? DeliveryService.cs:Line 16
-    // What about the change of the delivery address before sending the package?
-    // TODO: Refactor the Order and Position so that objects of these types are immutable (read-only).
-    // TODO: Reduce the interface of IBoxingService.Box(Order) to a minimum
+    // hmm.. it looks like somebody made a mistake in DeliveryService.Deliver
+    // and left some code in that was only meant for debug
+    // (adding a Position 'Windows 8' and appending Switzerland to the address)
+    // TODO: remove the mistakenly added code
+    // TODO: while you're at it: refactor the Order and Position so that objects of these types are immutable (read-only).
+    // TODO: reduce the interface of IBoxingService.Box(Order) to a minimum (hint: does IBoxingService really need to know about addresses?)
     public class DeliveryServiceTest
     {
         private DeliveryService testee;

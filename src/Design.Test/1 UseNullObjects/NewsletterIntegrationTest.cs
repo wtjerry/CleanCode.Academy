@@ -21,6 +21,9 @@ namespace CleanCode.Naming.UseNullObjects
     using FakeItEasy;
     using Xunit;
 
+    // Null the billion dollar mistake (maybe even trillion now?)
+    // A lot of code uses null as a placeholder, dummy initializer, special value, value meaning nothing is there...
+    // And if we just forget to check for null in one place, our program starts yelling at us, or even worse our customers.
     // TODO: Refactor the system (UseNullObjects namespace) in a way that the 'if' statement in the NewsletterService is no longer required! Use a Null object implementation
     // A Null object is an object with defined neutral ("null") behavior (see: http://en.wikipedia.org/wiki/Null_Object_pattern)
     // TODO: Remember to also remove tests that are no longer required if there are any

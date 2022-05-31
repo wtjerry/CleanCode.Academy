@@ -1,13 +1,13 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Persistence.cs" company="bbv Software Services AG">
 //   Copyright (c) 2014 - 2020
-//   
+//
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
-//   
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-//   
+//
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,6 +32,19 @@ namespace CleanCode.Naming.PersistingEnums
         public void Save(Person person)
         {
             this.store[person.Name] = person;
+
+            // imagine this method saves the person like this (obviously not exactly like this, because of Sql injection)
+            var sql = @$"
+            INSERT INTO Person
+            (
+                Name,
+                Title
+            )
+            VALUES
+            (
+                {person.Name},
+                {person.Title.ToString()} -- hint: this might be an issue
+            );";
         }
 
         public Person Load(string name)

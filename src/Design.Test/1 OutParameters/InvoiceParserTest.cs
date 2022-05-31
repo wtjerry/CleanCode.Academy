@@ -23,6 +23,9 @@ namespace CleanCode.Naming.OutParameters
     using FluentAssertions;
     using Xunit;
 
+    // out parameters is sometimes used if a method should return 2 "things".
+    // since ~c#7 it would also be possible to return a tuple instead of using out parameters.
+    // there is also the possibility to return a type that can represent failure (without value) or success with value.
     // TODO: Refactor the code so that you don't have an 'out' parameter anymore. But don't return 'null' when you cannot parse the invoice!
     // Hint: use a Result object
     public class InvoiceParserTest

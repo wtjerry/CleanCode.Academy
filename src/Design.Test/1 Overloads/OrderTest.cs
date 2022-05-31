@@ -21,6 +21,11 @@ namespace CleanCode.Naming.Overloads
     using FluentAssertions;
     using Xunit;
 
+    // Sometimes we have data which is used in different ways in different places.
+    // This is the case here: we have a Position, but cannot / don't want to always provide a color.
+    // That's why it has overloaded methods with some default values.
+    // With that comes a new problem, however: it's more difficult to keep track which overload calls which method
+    // and which methods might not even be used anymore.
     // TODO: Remove the overload with the signature 'AddPosition(string articleNumber, int amount, string size)' as it is never used
     // TODO: Refactor the 'Order' class in a way that you have to change the minimum possible amount of code when you remove another overload in the future
     public class OrderTest

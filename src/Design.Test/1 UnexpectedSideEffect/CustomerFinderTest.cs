@@ -21,9 +21,12 @@ namespace CleanCode.Naming.UnexpectedSideEffect
     using FluentAssertions;
     using Xunit;
 
+    // Here we've got a class that might be a database repository or something similar.
+    // Going by the name, it looks like it just finds/searches a customer.
+    // However there is some hidden functionality.
     // TODO: Change the SimpleCustomerFinder implementation so that the 'Find' method has no side effects.
     // e.g. add a query method to check for a customer to exist! or return a FindResult
-    // The finder should never create a customer. Creation of customers should be handled by another class (Single Responsibility Principle)
+    // The finder should never create a customer. Creation of customers should be handled by another class (Single Responsibility Principle, eg a class named CustomerModifier)
     public class CustomerFinderTest
     {
         private CustomerFinder testee;
