@@ -22,25 +22,19 @@ namespace CleanCode.Naming.OutParameters
     using System.Xml.Linq;
     using Xunit;
     using static CleanCode.Naming.MaybeExtensions;
+    using static CleanCode.Naming.OutParameters.InvoiceParser;
 
     // TODO: Refactor the code so that you don't have an 'out' parameter anymore. But don't return 'null' when you cannot parse the invoice!
     // Hint: use a Result object
     public class InvoiceParserTest
     {
-        private InvoiceParser testee;
-
-        public InvoiceParserTest()
-        {
-            this.testee = new InvoiceParser();
-        }
-
         [Fact]
         public void ParsesInvoice()
         {
             const string Customer = "bbv Software Services AG";
             const int Amount = 1200;
 
-            var maybeInvoice = this.testee.Parse(CreateInvoice(Customer, Amount));
+            var maybeInvoice = ParseInvoice(CreateInvoice(Customer, Amount));
 
             maybeInvoice.Should().BeSome(new Invoice(Customer, Amount));
         }
@@ -50,7 +44,7 @@ namespace CleanCode.Naming.OutParameters
         [InlineData("bbv", "")]
         public void InvoiceIsNone_WhenInvoiceCannotBeParsed(string customer, string amount)
         {
-            var maybeInvoice = this.testee.Parse(CreateInvoice(customer, amount));
+            var maybeInvoice = ParseInvoice(CreateInvoice(customer, amount));
 
             maybeInvoice.Should().BeNone();
         }

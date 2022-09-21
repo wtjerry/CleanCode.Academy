@@ -21,13 +21,13 @@ namespace CleanCode.Naming.OutParameters
     using System;
     using System.Xml.Linq;
 
-    public class InvoiceParser
+    public static class InvoiceParser
     {
-        public Maybe<Invoice> Parse(XDocument invoiceDescription)
+        public static Maybe<Invoice> ParseInvoice(XDocument invoiceDescription)
         {
-            XElement invoiceElement = invoiceDescription.Element("Invoice");
-            XElement customerElement = invoiceElement.Element("Customer");
-            XElement amountElement = invoiceElement.Element("Amount");
+            var invoiceElement = invoiceDescription.Element("Invoice");
+            var customerElement = invoiceElement.Element("Customer");
+            var amountElement = invoiceElement.Element("Amount");
 
             if (!IsInvoiceValid(customerElement, amountElement))
             {
@@ -38,13 +38,12 @@ namespace CleanCode.Naming.OutParameters
             return Maybe<Invoice>.Some(invoice);
         }
 
-        private bool IsInvoiceValid(XElement customerElement, XElement amountElement)
+        private static bool IsInvoiceValid(XElement customerElement, XElement amountElement)
         {
-            int amount;
             return customerElement != null
                 && !string.IsNullOrEmpty(customerElement.Value)
                 && amountElement != null
-                && int.TryParse(amountElement.Value, out amount);
+                && int.TryParse(amountElement.Value, out _);
         }
     }
 }
