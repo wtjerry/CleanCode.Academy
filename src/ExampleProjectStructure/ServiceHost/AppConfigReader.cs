@@ -7,7 +7,7 @@ internal static class AppConfigReader
     internal static AppConfig Read()
     {
         var config = new ConfigurationBuilder()
-            .AddJsonFile("appSettings.json")
+            .AddJsonFile("appsettings.json")
             .Build();
 
         var isFeatureCombinePositionsEnabled = config.GetValue<bool>("AppSettings:IsFeatureCombinePositionsEnabled");
