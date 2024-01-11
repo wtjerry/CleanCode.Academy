@@ -16,89 +16,78 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CleanCode.Naming.OutParameters
+namespace CleanCode.Naming.OutParameters;
+
+using FluentAssertions;
+using System;
+using System.Globalization;
+using System.Xml.Linq;
+using Xunit;
+
+// out parameters is sometimes used if a method should return 2 "things".
+// since ~c#7 it would also be possible to return a tuple instead of using out parameters.
+// there is also the possibility to return a type that can represent failure (without value) or success with value.
+// TODO: Refactor the code so that you don't have an 'out' parameter anymore. But don't return 'null' when you cannot parse the invoice!
+// Hint: use a Result object
+public class InvoiceParserTest
 {
-    using System;
-    using System.Xml.Linq;
-    using FluentAssertions;
-    using Xunit;
-
-    // out parameters is sometimes used if a method should return 2 "things".
-    // since ~c#7 it would also be possible to return a tuple instead of using out parameters.
-    // there is also the possibility to return a type that can represent failure (without value) or success with value.
-    // TODO: Refactor the code so that you don't have an 'out' parameter anymore. But don't return 'null' when you cannot parse the invoice!
-    // Hint: use a Result object
-    public class InvoiceParserTest
+    [Fact]
+    public void ParsesInvoice()
     {
-        private InvoiceParser testee;
+        const string Customer = "bbv Software Services AG";
+        const int Amount = 1200;
 
-        public InvoiceParserTest()
-        {
-            this.testee = new InvoiceParser();
-        }
+        var parsingSuccessful = InvoiceParser.TryParse(CreateInvoice(Customer, Amount), out var invoice);
 
-        [Fact]
-        public void ParsesInvoice()
-        {
-            const string Customer = "bbv Software Services AG";
-            const int Amount = 1200;
+        parsingSuccessful.Should().BeTrue();
+        invoice.Should().BeEquivalentTo(new Invoice(Customer, Amount));
+    }
 
-            Invoice invoice;
-            this.testee.TryParse(CreateInvoice(Customer, Amount), out invoice);
+    [Fact]
+    public void ReturnsTrue_WhenInvoiceCanBeParsed()
+    {
+        const string Customer = "bbv Software Services AG";
+        const int Amount = 1200;
 
-            invoice.Should().BeEquivalentTo(new Invoice(Customer, Amount));
-        }
+        var result = InvoiceParser.TryParse(CreateInvoice(Customer, Amount), out _);
 
-        [Fact]
-        public void ReturnsTrue_WhenInvoiceCanBeParsed()
-        {
-            const string Customer = "bbv Software Services AG";
-            const int Amount = 1200;
+        result.Should().BeTrue();
+    }
 
-            Invoice invoice;
-            bool result = this.testee.TryParse(CreateInvoice(Customer, Amount), out invoice);
+    [Theory]
+    [InlineData("", "100")]
+    [InlineData("bbv", "")]
+    public void InvoiceIsNull_WhenInvoiceCannotBeParsed(string customer, string amount)
+    {
+        _ = InvoiceParser.TryParse(CreateInvoice(customer, amount), out var invoice);
 
-            result.Should().BeTrue();
-        }
+        invoice.Should().BeNull();
+    }
 
-        [Theory]
-        [InlineData("", "100")]
-        [InlineData("bbv", "")]
-        public void InvoiceIsNull_WhenInvoiceCannotBeParsed(string customer, string amount)
-        {
-            Invoice invoice;
-            this.testee.TryParse(CreateInvoice(customer, amount), out invoice);
+    [Theory]
+    [InlineData("", "100")]
+    [InlineData("bbv", "")]
+    public void ReturnsFalse_WhenInvoiceCannotBeParsed(string customer, string amount)
+    {
+        var result = InvoiceParser.TryParse(CreateInvoice(customer, amount), out _);
 
-            invoice.Should().BeNull();
-        }
+        result.Should().BeFalse();
+    }
 
-        [Theory]
-        [InlineData("", "100")]
-        [InlineData("bbv", "")]
-        public void ReturnsFalse_WhenInvoiceCannotBeParsed(string customer, string amount)
-        {
-            Invoice invoice;
-            bool result = this.testee.TryParse(CreateInvoice(customer, amount), out invoice);
+    private static XDocument CreateInvoice(string customer, string amount)
+    {
+        var invoice = new XDocument();
+        var root = new XElement("Invoice");
+        invoice.Add(root);
 
-            result.Should().BeFalse();
-        }
+        root.Add(new XElement("Customer", customer));
+        root.Add(new XElement("Amount", amount));
 
-        private static XDocument CreateInvoice(string customer, string amount)
-        {
-            var invoice = new XDocument();
-            var root = new XElement("Invoice");
-            invoice.Add(root);
+        return invoice;
+    }
 
-            root.Add(new XElement("Customer", customer));
-            root.Add(new XElement("Amount", amount));
-
-            return invoice;
-
-        }
-
-        private static XDocument CreateInvoice(string customer, int amount)
-        {
-            return CreateInvoice(customer, Convert.ToString(amount));
-        }
+    private static XDocument CreateInvoice(string customer, int amount)
+    {
+        return CreateInvoice(customer, Convert.ToString(amount, CultureInfo.InvariantCulture));
     }
 }

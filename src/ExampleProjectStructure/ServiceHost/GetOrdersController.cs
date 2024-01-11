@@ -1,7 +1,7 @@
 ﻿namespace CleanCode.Academy.ServiceHost;
 
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/order")]
@@ -15,8 +15,7 @@ public class GetOrdersController : ControllerBase
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> Get(
-        string id)
+    public async Task<IActionResult> Get()
     {
         var orders = await this.factory
             .CreateGetOrdersFeature()

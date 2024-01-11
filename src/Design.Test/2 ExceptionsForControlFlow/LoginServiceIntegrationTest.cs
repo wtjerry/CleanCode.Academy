@@ -18,9 +18,9 @@
 
 namespace CleanCode.Naming.ExceptionsForControlFlow
 {
-    using System.Collections.Generic;
     using FakeItEasy;
     using FluentAssertions;
+    using System.Collections.Generic;
     using Xunit;
 
     // Imagine you work with an Authentication Provider and need to implement a new feature.
@@ -32,9 +32,9 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
     // You don't actually need to implement the account locking feature.
     public class LoginServiceIntegrationTest
     {
-        private IDictionary<string, string> knownUsers;
-        private LoginService testee;
-        private ITokenGenerator tokenGenerator;
+        private readonly IDictionary<string, string> knownUsers;
+        private readonly LoginService testee;
+        private readonly ITokenGenerator tokenGenerator;
 
         public LoginServiceIntegrationTest()
         {
@@ -52,7 +52,7 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
             const string SessionToken = "123456789";
 
             this.knownUsers.Add(Username, Password);
-            A.CallTo(() => this.tokenGenerator.Get()).Returns(SessionToken);
+            A.CallTo(() => this.tokenGenerator.GetToken()).Returns(SessionToken);
 
             LoginResult loginResult = this.testee.Login(Username, Password);
 
@@ -83,6 +83,5 @@ namespace CleanCode.Naming.ExceptionsForControlFlow
 
             loginResult.Message.Should().Be("User not found");
         }
-
     }
 }

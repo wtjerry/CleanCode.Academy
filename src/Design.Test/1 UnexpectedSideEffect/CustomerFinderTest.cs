@@ -29,7 +29,7 @@ namespace CleanCode.Naming.UnexpectedSideEffect
     // The finder should never create a customer. Creation of customers should be handled by another class (Single Responsibility Principle, eg a class named CustomerModifier)
     public class CustomerFinderTest
     {
-        private CustomerFinder testee;
+        private readonly CustomerFinder testee;
 
         public CustomerFinderTest()
         {

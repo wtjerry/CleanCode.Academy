@@ -16,36 +16,35 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CleanCode.Naming.OutParameters
+namespace CleanCode.Naming.OutParameters;
+
+using System;
+using System.Globalization;
+using System.Xml.Linq;
+
+public class InvoiceParser
 {
-    using System;
-    using System.Xml.Linq;
-
-    public class InvoiceParser
+    public static bool TryParse(XDocument invoiceDescription, out Invoice invoice)
     {
-        public bool TryParse(XDocument invoiceDescription, out Invoice invoice)
+        XElement invoiceElement = invoiceDescription.Element("Invoice");
+        XElement customerElement = invoiceElement.Element("Customer");
+        XElement amountElement = invoiceElement.Element("Amount");
+
+        if (!IsInvoiceValid(customerElement, amountElement))
         {
-            XElement invoiceElement = invoiceDescription.Element("Invoice");
-            XElement customerElement = invoiceElement.Element("Customer");
-            XElement amountElement = invoiceElement.Element("Amount");
-
-            if (!IsInvoiceValid(customerElement, amountElement))
-            {
-                invoice = null;
-                return false;
-            }
-
-            invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value));
-            return true;
+            invoice = null;
+            return false;
         }
 
-        private bool IsInvoiceValid(XElement customerElement, XElement amountElement)
-        {
-            int amount;
-            return customerElement != null
-                && !string.IsNullOrEmpty(customerElement.Value)
-                && amountElement != null
-                && int.TryParse(amountElement.Value, out amount);
-        }
+        invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value, CultureInfo.InvariantCulture));
+        return true;
+    }
+
+    private static bool IsInvoiceValid(XElement customerElement, XElement amountElement)
+    {
+        return customerElement != null
+               && !string.IsNullOrEmpty(customerElement.Value)
+               && amountElement != null
+               && int.TryParse(amountElement.Value, out _);
     }
 }

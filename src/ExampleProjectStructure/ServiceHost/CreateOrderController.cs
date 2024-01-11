@@ -1,9 +1,9 @@
 ﻿namespace CleanCode.Academy.ServiceHost;
 
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Parsing.Extensions;
+using System;
+using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/order")]

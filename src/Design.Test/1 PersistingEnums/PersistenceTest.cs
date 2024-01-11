@@ -26,7 +26,7 @@ namespace CleanCode.Naming.PersistingEnums
     // TODO: Make sure you can easily add a new 'Title' and don't get into trouble when you rename the title.
     public class PersistenceTest
     {
-        private Persistence testee;
+        private readonly Persistence testee;
 
         public PersistenceTest()
         {

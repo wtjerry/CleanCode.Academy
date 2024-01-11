@@ -11,9 +11,9 @@
     // TODO: reduce the interface of IBoxingService.Box(Order) to a minimum (hint: does IBoxingService really need to know about addresses?)
     public class DeliveryServiceTest
     {
-        private DeliveryService testee;
-        private IMailService mailService;
-        private IBoxingService boxingService;
+        private readonly DeliveryService testee;
+        private readonly IMailService mailService;
+        private readonly IBoxingService boxingService;
 
         public DeliveryServiceTest()
         {

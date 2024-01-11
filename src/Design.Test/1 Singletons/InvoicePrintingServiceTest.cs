@@ -18,13 +18,13 @@
 
 namespace CleanCode.Naming.Singletons
 {
-    using System;
     using FluentAssertions;
+    using System;
     using Xunit;
 
     public class InvoicePrintingServiceTest
     {
-        private InvoicePrintingService testee;
+        private readonly InvoicePrintingService testee;
 
         // Oh no it's those awful Singletons again. Once upon a time they were praised as the best thing
         // since slided bread. Nowadays we see them mostly as legacy code that makes our life

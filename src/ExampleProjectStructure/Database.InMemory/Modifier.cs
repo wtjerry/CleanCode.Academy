@@ -1,10 +1,10 @@
 ﻿namespace CleanCode.Academy.Database.InMemory;
 
+using Core.CreateOrder;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.CreateOrder;
 
 public class Modifier : IModifier
 {

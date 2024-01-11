@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-public struct Maybe<T> : IEquatable<Maybe<T>>
+public readonly struct Maybe<T> : IEquatable<Maybe<T>>
 {
     private readonly IEnumerable<T> values;
 
@@ -57,7 +57,7 @@ public struct Maybe<T> : IEquatable<Maybe<T>>
         "Microsoft.Design",
         "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
         Justification = "Maybe is a struct with a private constructor.")]
-    public static Maybe<T> None() => new Maybe<T>(Array.Empty<T>());
+    public static Maybe<T> None() => new(Array.Empty<T>());
 
     public Maybe<TDestination> Map<TDestination>(Func<T, TDestination> mapper)
     {

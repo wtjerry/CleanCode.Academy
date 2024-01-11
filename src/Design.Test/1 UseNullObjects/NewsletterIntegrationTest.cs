@@ -29,8 +29,8 @@ namespace CleanCode.Naming.UseNullObjects
     // TODO: Remember to also remove tests that are no longer required if there are any
     public class NewsletterIntegrationTest
     {
-        private IMailDispatcher mailDispatcher;
-        private NewsletterService testee;
+        private readonly IMailDispatcher mailDispatcher;
+        private readonly NewsletterService testee;
 
         public NewsletterIntegrationTest()
         {

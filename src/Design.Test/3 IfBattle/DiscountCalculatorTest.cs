@@ -25,19 +25,12 @@ namespace CleanCode.Naming.IfBattle
     // Important: Make sure you do small steps. Don't let all your tests fail, use parallel implementation etc.
     public class DiscountCalculatorTest
     {
-        private DiscountCalculator testee;
-
-        public DiscountCalculatorTest()
-        {
-            this.testee = new DiscountCalculator();
-        }
-
         [Fact]
         public void HasNoDiscount_WhenNewCustomer()
         {
             var order = new Order(new Customer(), 50);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(0);
         }
@@ -48,7 +41,7 @@ namespace CleanCode.Naming.IfBattle
             var customer = new Customer { NumberOfOrders = 10 };
             var order = new Order(customer, 0);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(5);
         }
@@ -59,7 +52,7 @@ namespace CleanCode.Naming.IfBattle
             var customer = new Customer { NumberOfOrders = 10 };
             var order = new Order(customer, 100);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(7);
         }
@@ -70,7 +63,7 @@ namespace CleanCode.Naming.IfBattle
             var customer = new Customer();
             var order = new Order(customer, 200);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(1);
         }
@@ -81,7 +74,7 @@ namespace CleanCode.Naming.IfBattle
             var customer = new Customer();
             var order = new Order(customer, 29);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(-2);
         }
@@ -92,7 +85,7 @@ namespace CleanCode.Naming.IfBattle
             var customer = new Customer { NumberOfOrders = 1000 };
             var order = new Order(customer, 199);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(6);
         }
@@ -103,7 +96,7 @@ namespace CleanCode.Naming.IfBattle
             var customer = new Customer { NumberOfOrders = 1000 };
             var order = new Order(customer, 200);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(8);
         }
@@ -115,7 +108,7 @@ namespace CleanCode.Naming.IfBattle
             var customer = new Customer { NumberOfOrders = 1000 };
             var order = new Order(customer, 150);
 
-            int discount = this.testee.CalculateDiscount(order);
+            int discount = DiscountCalculator.CalculateDiscount(order);
 
             discount.Should().Be(7);
         }

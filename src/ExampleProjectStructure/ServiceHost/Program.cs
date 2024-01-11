@@ -1,9 +1,9 @@
 ﻿namespace CleanCode.Academy.ServiceHost;
 
-using System;
 using Database.InMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 public static class Program
 {

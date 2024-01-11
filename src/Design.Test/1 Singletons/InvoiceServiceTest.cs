@@ -18,14 +18,14 @@
 
 namespace CleanCode.Naming.Singletons
 {
-    using System;
     using FluentAssertions;
+    using System;
     using Xunit;
 
     // TODO: Refactor the code in a way that you can implement the failing test properly (today has to remain 2013-02-27!!)
     public class InvoiceServiceTest
     {
-        private InvoiceService testee;
+        private readonly InvoiceService testee;
 
         public InvoiceServiceTest()
         {

@@ -16,7 +16,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CleanCode.Naming.Overloads
+namespace CleanCode.Naming.OverloadedMethods
 {
     using FluentAssertions;
     using Xunit;
@@ -30,7 +30,7 @@ namespace CleanCode.Naming.Overloads
     // TODO: Refactor the 'Order' class in a way that you have to change the minimum possible amount of code when you remove another overload in the future
     public class OrderTest
     {
-        private Order testee;
+        private readonly Order testee;
 
         public OrderTest()
         {

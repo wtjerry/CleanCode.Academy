@@ -18,6 +18,7 @@
 
 namespace CleanCode.Naming.PersistingEnums
 {
+    using System;
     using System.Collections.Generic;
 
     public class Persistence
@@ -26,7 +27,7 @@ namespace CleanCode.Naming.PersistingEnums
 
         public Persistence()
         {
-            this.store = new Dictionary<string, Person>();
+            this.store = [];
         }
 
         public void Save(Person person)
@@ -34,17 +35,19 @@ namespace CleanCode.Naming.PersistingEnums
             this.store[person.Name] = person;
 
             // imagine this method saves the person like this (obviously not exactly like this, because of Sql injection)
-            var sql = @$"
-            INSERT INTO Person
-            (
-                Name,
-                Title
-            )
-            VALUES
-            (
-                {person.Name},
-                {person.Title.ToString()} -- hint: this might be an issue
-            );";
+            var sql = $"""
+               INSERT INTO Person
+               (
+                   Name,
+                   Title
+               )
+               VALUES
+               (
+                   {person.Name},
+                   {person.Title} -- hint: this might be an issue
+               );
+            """;
+            Console.WriteLine(sql);
         }
 
         public Person Load(string name)

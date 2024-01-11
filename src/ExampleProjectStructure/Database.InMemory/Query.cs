@@ -1,8 +1,8 @@
 ﻿namespace CleanCode.Academy.Database.InMemory;
 
+using Core.GetOrders;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.GetOrders;
 
 public class Query : IQuery
 {

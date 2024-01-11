@@ -31,22 +31,30 @@ csharp_style_var_when_type_is_apparent = true:warning
 dotnet_analyzer_diagnostic.severity = warning   # By default, all results are treated as warnings
 
 dotnet_diagnostic.IDE0008.severity = none # we want to use var
+dotnet_diagnostic.IDE0022.severity = none # expression bodies can increase readability
+dotnet_diagnostic.IDE0046.severity = none # if "simplification" is not always more readable
 dotnet_diagnostic.IDE0058.severity = none # using discards like so "_ = SomethingThatDoesASideEffectButAlsoReturnsAValueWeDontNeed()", leads to too much noise
 dotnet_diagnostic.IDE0065.severity = none # we want to use file scoped namespaces
+dotnet_diagnostic.IDE0074.severity = none # compound assignment operator (?=) can cause lot's of confusion because it does 2 different things: assignment and bool predicate 
 dotnet_diagnostic.IDE0160.severity = none # we want to use file scoped namespaces
 dotnet_diagnostic.IDE0290.severity = none # primary constructors are no drop-in replacement for single ctor classes. Primary ctor "parameters" are mutable in methods, whereas "normal" ctor parameters can become readonly fields.
 
 dotnet_diagnostic.SA0001.severity = none # we do not generate xml documentation based on code documentation.
 dotnet_diagnostic.SA1135.severity = none # we do not use fully qualified directives
+dotnet_diagnostic.SA1201.severity = none # method ordering
 dotnet_diagnostic.SA1402.severity = none # files with multiple related classes/records make more sense than spreading them out
 dotnet_diagnostic.SA1600.severity = none # documentation on method level does not always make sense
 dotnet_diagnostic.SA1601.severity = none # documentation on partial classes does not always make sense
 dotnet_diagnostic.SA1602.severity = none # documentation on enums does not always make sense
+dotnet_diagnostic.SA1611.severity = none # documentation parameters does not always make sense
 dotnet_diagnostic.SA1615.severity = none # documentation for all parameters does not always make sense
 dotnet_diagnostic.SA1623.severity = none # not all of our documentation is english
 dotnet_diagnostic.SA1629.severity = none # not all of our documentation is english
 dotnet_diagnostic.SA1633.severity = none # produces unnecessary noise
 dotnet_diagnostic.SA1636.severity = none # copyright header noise
+dotnet_diagnostic.SA1649.severity = none # if a file contains multiple classes / types it's name cannot match all of them
+dotnet_diagnostic.CA1707.severity = none # underscores can make test methods more readable
+dotnet_diagnostic.CA1859.severity = none # 
 
 dotnet_diagnostic.CA1062.severity = none # We do not always check input parameters
 dotnet_diagnostic.CS1591.severity = none # Missing XML comment for publicly visible type or member

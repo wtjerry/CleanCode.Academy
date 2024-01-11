@@ -1,7 +1,7 @@
 ﻿namespace CleanCode.Academy.ServiceHost;
 
-using System.Threading.Tasks;
 using Core.CreateOrder;
+using System.Threading.Tasks;
 
 public class OrderCreatedPublisher : IOrderCreatedPublisher
 {

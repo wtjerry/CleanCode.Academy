@@ -23,8 +23,8 @@ namespace CleanCode.Naming.UseNullObjects
 
     public class LargeAccountCustomerTest
     {
-        private LargeAccountCustomer testee;
-        private IMailDispatcher dispatcher;
+        private readonly LargeAccountCustomer testee;
+        private readonly IMailDispatcher dispatcher;
 
         public LargeAccountCustomerTest()
         {

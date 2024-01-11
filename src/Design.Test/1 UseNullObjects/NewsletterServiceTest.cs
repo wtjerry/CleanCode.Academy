@@ -18,15 +18,15 @@
 
 namespace CleanCode.Naming.UseNullObjects
 {
-    using System;
     using FakeItEasy;
     using FluentAssertions;
+    using System;
     using Xunit;
 
     public class NewsletterServiceTest
     {
-        private NewsletterService testee;
-        private ICustomerFinder customerFinder;
+        private readonly NewsletterService testee;
+        private readonly ICustomerFinder customerFinder;
 
         public NewsletterServiceTest()
         {

@@ -23,8 +23,8 @@ namespace CleanCode.Naming.UseNullObjects
 
     public class NewCustomerTest
     {
-        private IMailDispatcher dispatcher;
-        private NewCustomer testee;
+        private readonly IMailDispatcher dispatcher;
+        private readonly NewCustomer testee;
 
         public NewCustomerTest()
         {

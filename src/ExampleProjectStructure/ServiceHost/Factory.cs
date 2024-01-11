@@ -1,9 +1,9 @@
 ﻿namespace CleanCode.Academy.ServiceHost;
 
-using System;
 using Core.CreateOrder;
 using Core.GetOrders;
 using Database.InMemory;
+using System;
 
 public class Factory
 {
