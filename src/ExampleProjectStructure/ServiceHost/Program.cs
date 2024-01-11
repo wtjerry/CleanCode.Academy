@@ -3,6 +3,7 @@
 using Database.InMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 
 public static class Program
@@ -24,14 +25,19 @@ public static class Program
                 new InMemoryPersistence()));
 
         builder.Services.AddControllers();
+        builder.Services.AddSwaggerGen();
+
         var app = builder.Build();
 
         app.UseRouting();
 
-        app.UseEndpoints(endpoints =>
+        app.MapControllers();
+
+        if (app.Environment.IsDevelopment())
         {
-            endpoints.MapControllers();
-        });
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
 
         app.Run();
     }

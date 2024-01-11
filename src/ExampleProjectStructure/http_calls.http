@@ -1,0 +1,18 @@
+@hostAddress = http://localhost:5000/api/order
+
+GET {{hostAddress}}/
+Accept: application/json
+
+### place an example order
+POST {{hostAddress}}/
+Content-Type: application/json
+
+{
+    "address": "order address 1",
+    "positions": [
+      {
+        "name": "order 1",
+        "amount": 9001
+      }
+    ]
+}
