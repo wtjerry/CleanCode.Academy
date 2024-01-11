@@ -4,7 +4,7 @@
   <PropertyGroup>
     <RootNamespace>CleanCode.Academy.$(MSBuildProjectName)</RootNamespace>
     <AssemblyName>CleanCode.Academy.$(MSBuildProjectName)</AssemblyName>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
     <Nullable>disable</Nullable>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
@@ -25,16 +25,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)src/AssemblyInfo.cs" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)src/rules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
