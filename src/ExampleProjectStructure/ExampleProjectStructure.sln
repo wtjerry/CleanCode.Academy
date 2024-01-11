@@ -11,6 +11,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{0216234D-EAE1-47B8-89EE-F4028CD285CD}"
 	ProjectSection(SolutionItems) = preProject
 		http_calls.http = http_calls.http
+		Dockerfile = Dockerfile
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
