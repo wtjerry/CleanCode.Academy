@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		rules.ruleset = src/rules.ruleset
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Design", "2 Design", "{34296107-7E3C-4F7D-BFF1-18B9C1E44A77}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{34296107-7E3C-4F7D-BFF1-18B9C1E44A77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Design", "src\Design\Design.csproj", "{BCF720A6-1307-49E1-9015-2BB0363A9D2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Design.Test", "src\Design.Test\Design.Test.csproj", "{AB8F2097-9BCF-4F51-889D-A0F67C8A14DA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 Example project structure", "5 Example project structure", "{6C3B1A36-CF19-4E8A-94A0-35FB5D9D17DF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example project structure", "Example project structure", "{6C3B1A36-CF19-4E8A-94A0-35FB5D9D17DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\ExampleProjectStructure\Core\Core.csproj", "{7CAB0764-A07C-4922-92D9-7251B3172D95}"
 EndProject
