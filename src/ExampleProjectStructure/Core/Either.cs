@@ -81,7 +81,7 @@ public readonly struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>
         ArgumentNullException.ThrowIfNull(nullableValue);
 
         return new Either<TLeft, TRight>(
-            new[] { nullableValue },
+            [nullableValue],
             null);
     }
 
@@ -102,7 +102,7 @@ public readonly struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>
 
         return new Either<TLeft, TRight>(
             null,
-            new[] { value });
+            [value]);
     }
 
     public TRight GetRightOrThrow(Func<TLeft, Exception> leftToException)

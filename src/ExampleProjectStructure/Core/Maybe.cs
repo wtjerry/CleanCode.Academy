@@ -50,14 +50,14 @@ public readonly struct Maybe<T> : IEquatable<Maybe<T>>
             throw new ArgumentNullException(nameof(value));
         }
 
-        return new Maybe<T>(new[] { value });
+        return new Maybe<T>([value]);
     }
 
     [SuppressMessage(
         "Microsoft.Design",
         "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
         Justification = "Maybe is a struct with a private constructor.")]
-    public static Maybe<T> None() => new(Array.Empty<T>());
+    public static Maybe<T> None() => new([]);
 
     public Maybe<TDestination> Map<TDestination>(Func<T, TDestination> mapper)
     {
