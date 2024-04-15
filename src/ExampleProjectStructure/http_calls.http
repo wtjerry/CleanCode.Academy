@@ -1,4 +1,4 @@
-@hostAddress = http://localhost:5000/api/order
+@hostAddress = http://localhost:8080/api/order
 
 GET {{hostAddress}}/
 Accept: application/json

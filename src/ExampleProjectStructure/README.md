@@ -11,7 +11,7 @@ to build an image:
 
 and then to create and run a container:
 
-```docker run --rm localhost/example_project_structure_cc```
+```docker run --rm -p=8080:8080 localhost/example_project_structure_cc```
 
 or if you're having trouble in WSL maybe:
 
