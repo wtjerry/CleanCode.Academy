@@ -36,6 +36,7 @@ dotnet_diagnostic.IDE0046.severity = none # if "simplification" is not always mo
 dotnet_diagnostic.IDE0058.severity = none # using discards like so "_ = SomethingThatDoesASideEffectButAlsoReturnsAValueWeDontNeed()", leads to too much noise
 dotnet_diagnostic.IDE0065.severity = none # we want to use file scoped namespaces
 dotnet_diagnostic.IDE0074.severity = none # compound assignment operator (?=) can cause lot's of confusion because it does 2 different things: assignment and bool predicate 
+dotnet_diagnostic.IDE0100.severity = none # dont use "x == false" but "!x". "!x" is less readable most of the time    
 dotnet_diagnostic.IDE0160.severity = none # we want to use file scoped namespaces
 dotnet_diagnostic.IDE0290.severity = none # primary constructors are no drop-in replacement for single ctor classes. Primary ctor "parameters" are mutable in methods, whereas "normal" ctor parameters can become readonly fields.
 
