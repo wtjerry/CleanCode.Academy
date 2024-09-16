@@ -4,7 +4,7 @@
   <PropertyGroup>
     <RootNamespace>CleanCode.Academy.$(MSBuildProjectName)</RootNamespace>
     <AssemblyName>CleanCode.Academy.$(MSBuildProjectName)</AssemblyName>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <Nullable>disable</Nullable>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
