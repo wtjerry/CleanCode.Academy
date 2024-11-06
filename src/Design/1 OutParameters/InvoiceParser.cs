@@ -21,6 +21,7 @@ namespace CleanCode.Naming.OutParameters
     using System;
     using System.Xml.Linq;
     using static CleanCode.Naming.Maybe2<Invoice>;
+    using static CleanCode.Naming.Result<string, Invoice>;
 
     public static class InvoiceParser
     {
@@ -66,6 +67,21 @@ namespace CleanCode.Naming.OutParameters
 
             var invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value));
             return new Just<Invoice>(invoice);
+        }
+
+        public static Result<string, Invoice> ParseInvoice2(XDocument invoiceDescription)
+        {
+            var invoiceElement = invoiceDescription.Element("Invoice");
+            var customerElement = invoiceElement.Element("Customer");
+            var amountElement = invoiceElement.Element("Amount");
+
+            if (!IsInvoiceValid(customerElement, amountElement))
+            {
+                return new Error<string>("error");
+            }
+
+            var invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value));
+            return new Success<Invoice>(invoice);
         }
 
         private static bool IsInvoiceValid(XElement customerElement, XElement amountElement)

@@ -7,7 +7,7 @@ namespace CleanCode.Naming
     using FluentAssertions.Primitives;
     using Xunit.Sdk;
 
-    public class MaybeAssertions2<T> : ReferenceTypeAssertions<Maybe<T>, MaybeAssertions2<T>>
+    public class MaybeAssertions2<T> : ReferenceTypeAssertions<Maybe2<T>, MaybeAssertions2<T>>
     {
         public MaybeAssertions2(Maybe2<T> instance)
             : base(instance)
@@ -36,7 +36,7 @@ namespace CleanCode.Naming
         {
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
-                .ForCondition(!this.Subject.HasValue)
+                .ForCondition(this.Subject is Maybe2<T>.Nothing<T>)
                 .FailWith($"Expected subject to be None but was Some.");
 
             return new AndConstraint<MaybeAssertions2<T>>(this);
@@ -48,18 +48,22 @@ namespace CleanCode.Naming
             var exceptionText = string.Empty;
             try
             {
-                if (this.Subject.HasValue)
+                switch (this.Subject)
                 {
-                    this.Subject
-                        .Value
-                        .Should()
-                        .BeEquivalentTo(other);
-                    areEquivalent = true;
+                    case Maybe2<T>.Just<T> just:
+                        just
+                            .Value
+                            .Should()
+                            .BeEquivalentTo(other);
+                        areEquivalent = true;
+                        break;
+                    case Maybe2<T>.Nothing<T> nothing:
+                        areEquivalent = false;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Subject));
                 }
-                else
-                {
-                    areEquivalent = false;
-                }
+
             }
             catch (XunitException ex)
             {
@@ -69,17 +73,25 @@ namespace CleanCode.Naming
 
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
-                .ForCondition(this.Subject.HasValue)
+                .ForCondition(this.Subject is Maybe2<T>.Just<T>)
                 .FailWith($"Expected subject to be Some but was None.")
                 .Then
-                .ForCondition(this.Subject.HasValue && this.Subject.Value.GetType() == other.GetType())
-                .FailWith($"Expected subject and other to be of the same type. Subject: '{this.Subject.Value.GetType()}', other: '{other.GetType()}'")
+                .ForCondition(AreBothSubjectsOfSameType(other))
+                .FailWith($"Expected subject and other to be of the same type. Subject: '{((Maybe2<T>.Just<T>)this.Subject).Value.GetType()}', other: '{other.GetType()}'")
                 .Then
                 .ForCondition(areEquivalent)
                 .FailWith(exceptionText);
 
             return new AndConstraint<MaybeAssertions2<T>>(this);
         }
+
+        private bool AreBothSubjectsOfSameType(T other) =>
+            this.Subject switch
+            {
+                Maybe2<T>.Just<T> just => just.Value.GetType() == other.GetType(),
+                Maybe2<T>.Nothing<T> => false,
+                _ => throw new ArgumentOutOfRangeException(nameof(Subject))
+            };
 
         private static bool AreValuesEquivalentIfSome(Maybe2<T> subject, Maybe2<T> otherMaybe)
         {

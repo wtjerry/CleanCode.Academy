@@ -17,6 +17,17 @@ public abstract record Maybe2<TResult>
     }
 }
 
+public abstract record Result<TError, TSuccess>
+{
+    public sealed record Error<T>(T Value) : Result<T, TSuccess>();
+
+    public sealed record Success<T>(T Value) : Result<TError, T>();
+
+    private Result()
+    {
+    }
+}
+
 public struct Maybe<T> : IEquatable<Maybe<T>>
 {
     private readonly IEnumerable<T> values;
