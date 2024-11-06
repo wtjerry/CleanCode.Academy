@@ -6,6 +6,17 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
+public abstract record Maybe2<TResult>
+{
+    public sealed record Nothing<T>() : Maybe2<T>();
+
+    public sealed record Just<T>(T Value) : Maybe2<T>();
+
+    private Maybe2()
+    {
+    }
+}
+
 public struct Maybe<T> : IEquatable<Maybe<T>>
 {
     private readonly IEnumerable<T> values;

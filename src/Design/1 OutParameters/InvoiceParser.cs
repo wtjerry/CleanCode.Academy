@@ -20,6 +20,7 @@ namespace CleanCode.Naming.OutParameters
 {
     using System;
     using System.Xml.Linq;
+    using static CleanCode.Naming.Maybe2<Invoice>;
 
     public static class InvoiceParser
     {
@@ -44,6 +45,35 @@ namespace CleanCode.Naming.OutParameters
                 && !string.IsNullOrEmpty(customerElement.Value)
                 && amountElement != null
                 && int.TryParse(amountElement.Value, out _);
+        }
+    }
+
+
+
+
+    public static class InvoiceParser2
+    {
+        public static Maybe2<Invoice> ParseInvoice(XDocument invoiceDescription)
+        {
+            var invoiceElement = invoiceDescription.Element("Invoice");
+            var customerElement = invoiceElement.Element("Customer");
+            var amountElement = invoiceElement.Element("Amount");
+
+            if (!IsInvoiceValid(customerElement, amountElement))
+            {
+                return new Nothing<Invoice>();
+            }
+
+            var invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value));
+            return new Just<Invoice>(invoice);
+        }
+
+        private static bool IsInvoiceValid(XElement customerElement, XElement amountElement)
+        {
+            return customerElement != null
+                   && !string.IsNullOrEmpty(customerElement.Value)
+                   && amountElement != null
+                   && int.TryParse(amountElement.Value, out _);
         }
     }
 }
