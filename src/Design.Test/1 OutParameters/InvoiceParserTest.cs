@@ -24,10 +24,12 @@ namespace CleanCode.Naming.OutParameters
     using static CleanCode.Naming.MaybeExtensions;
     using static CleanCode.Naming.MaybeExtensions2;
     using static CleanCode.Naming.OutParameters.InvoiceParser;
+    using static CleanCode.Naming.Maybe2<Invoice>;
+    using static CleanCode.Naming.Result<string, string>;
 
     // TODO: Refactor the code so that you don't have an 'out' parameter anymore. But don't return 'null' when you cannot parse the invoice!
     // Hint: use a Result object
-    public class InvoiceParserTest
+    public class InvoiceParserTest2
     {
         [Fact]
         public void ParsesInvoice()

@@ -25,35 +25,6 @@ namespace CleanCode.Naming.OutParameters
 
     public static class InvoiceParser
     {
-        public static Maybe<Invoice> ParseInvoice(XDocument invoiceDescription)
-        {
-            var invoiceElement = invoiceDescription.Element("Invoice");
-            var customerElement = invoiceElement.Element("Customer");
-            var amountElement = invoiceElement.Element("Amount");
-
-            if (!IsInvoiceValid(customerElement, amountElement))
-            {
-                return Maybe<Invoice>.None();
-            }
-
-            var invoice = new Invoice(customerElement.Value, Convert.ToInt32(amountElement.Value));
-            return Maybe<Invoice>.Some(invoice);
-        }
-
-        private static bool IsInvoiceValid(XElement customerElement, XElement amountElement)
-        {
-            return customerElement != null
-                && !string.IsNullOrEmpty(customerElement.Value)
-                && amountElement != null
-                && int.TryParse(amountElement.Value, out _);
-        }
-    }
-
-
-
-
-    public static class InvoiceParser2
-    {
         public static Maybe2<Invoice> ParseInvoice(XDocument invoiceDescription)
         {
             var invoiceElement = invoiceDescription.Element("Invoice");
